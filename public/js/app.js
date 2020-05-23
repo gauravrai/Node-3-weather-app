@@ -10,7 +10,7 @@ weatherForm.addEventListener('submit', (e)=>{
     e.preventDefault()
     messageOne.textContent = "Loading..."
     messageTwo.textContent = ""
-    fetch('http://api.weatherstack.com/current?access_key=5106cd31fffa760bc05c54610ac5361f&query='+search.value+'&units=f')
+    fetch('/weather/?address='+search.value+'')
         .then((response)=>{
             response.json().then((data)=>{
                 if(data.hasOwnProperty('error')){
@@ -19,7 +19,7 @@ weatherForm.addEventListener('submit', (e)=>{
                 }
                 else{
                     messageOne.textContent = ""
-                    messageTwo.textContent = data.location.name + ", " + data.current.weather_descriptions[0]
+                    messageTwo.textContent = data.location + ", " + data.forecast
                 }
             })
     })
